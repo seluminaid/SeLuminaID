@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2147C7" id="browserThemeColor">
+<title>SeLuminaID — Simple Software for Everyday Life</title>
+<meta name="description" content="SeLuminaID builds simple, practical software that makes everyday digital tasks easier.">
+<meta property="og:title" content="SeLuminaID — Simple Software for Everyday Life">
+<meta property="og:description" content="SeLuminaID builds simple, practical software that makes everyday digital tasks easier.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F6F8FD;
+  --surface: #FFFFFF;
+  --surface-2: #EEF2FB;
+  --border: #DCE3F3;
+  --text: #0E1B3D;
+  --text-dim: #566285;
+  --accent: #2147C7;
+  --accent-strong: #1A3AA3;
+  --accent-contrast: #FFFFFF;
+  --accent-soft: #E3EAFC;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 1px 2px rgba(14,27,61,0.06), 0 8px 24px -12px rgba(14,27,61,0.18);
+  --c-seqrcode: #B5772E;
+  --c-secompress: #1D4ED8;
+  --c-sepdf: #6D4AFF;
+  --font-display: "Outfit", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #0B1226;
+  --surface: #121B36;
+  --surface-2: #17224A;
+  --border: #25336A;
+  --text: #EAF0FF;
+  --text-dim: #9AABD1;
+  --accent: #7BA2FF;
+  --accent-strong: #9DBAFF;
+  --accent-contrast: #07142E;
+  --accent-soft: #1B2D5E;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.6);
+  --c-seqrcode: #E8A33D;
+  --c-secompress: #6EA2FF;
+  --c-sepdf: #A48BFF;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; color: var(--text); }
+a { color: inherit; }
+button { font-family: inherit; font-size: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.nav { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+.nav-inner { max-width: 1080px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+.logo { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; letter-spacing: -0.02em; text-decoration: none; color: var(--text); margin-right: auto; }
+.logo span { color: var(--accent); }
+.nav-links { display: none; gap: 22px; margin-right: 8px; }
+.nav-links a { text-decoration: none; font-size: 0.92rem; font-weight: 600; color: var(--text-dim); }
+.nav-links a:hover { color: var(--text); }
+.icon-btn { border: 1px solid var(--border); background: var(--surface); color: var(--text); height: 36px; padding: 0 12px; border-radius: 999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.82rem; font-weight: 700; }
+.theme-toggle { width: 36px; padding: 0; }
+.icon-moon { display: none; }
+[data-theme="dark"] .icon-sun { display: none; }
+[data-theme="dark"] .icon-moon { display: block; }
+.hero { padding: 72px 20px 56px; text-align: center; }
+.hero-inner { max-width: 680px; margin: 0 auto; }
+.hero h1 { font-size: clamp(2.1rem, 6vw, 3.4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
+.hero-sub { margin: 18px auto 0; color: var(--text-dim); font-size: 1.1rem; max-width: 52ch; }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; border-radius: var(--radius-sm); padding: 11px 24px; font-size: 0.95rem; font-weight: 700; border: 1px solid transparent; text-decoration: none; }
+.btn-primary { background: var(--accent); color: var(--accent-contrast); }
+.btn-primary:hover { background: var(--accent-strong); }
+.btn-ghost { background: transparent; border-color: var(--border); color: var(--text); }
+.btn-ghost:hover { background: var(--surface-2); }
+.section { padding: 56px 0; border-top: 1px solid var(--border); }
+.section-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+.section h2 { font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 20px; }
+.lead { margin: 0 0 32px; max-width: 62ch; font-size: 1.08rem; color: var(--text); }
+.principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.principle { border-left: 3px solid var(--accent); padding-left: 16px; }
+.principle h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.principle p { margin: 0; color: var(--text-dim); font-size: 0.93rem; }
+.vm { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: start; }
+.vm h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--accent); }
+.vision { margin: 0; font-family: var(--font-display); font-size: 1.5rem; line-height: 1.3; letter-spacing: -0.02em; font-weight: 600; }
+.mission { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.mission li { padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+.products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; list-style: none; margin: 0; padding: 0; }
+.products li { display: flex; }
+.product { display: flex; flex-direction: column; gap: 8px; width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; text-decoration: none; color: var(--text); box-shadow: var(--shadow); }
+a.product:hover { border-color: var(--pc); }
+.product-head { display: flex; align-items: center; gap: 10px; }
+.mark { color: var(--pc); flex: none; }
+.product h3 { font-size: 1.2rem; letter-spacing: -0.01em; }
+.product p { margin: 0; color: var(--text-dim); font-size: 0.93rem; flex: 1; }
+.product-foot { display: flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: var(--pc); margin-top: 6px; }
+dialog { max-width: 480px; width: calc(100% - 40px); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); color: var(--text); padding: 24px; box-shadow: var(--shadow); }
+dialog::backdrop { background: rgba(0,0,0,0.5); }
+dialog h3 { margin-bottom: 12px; }
+dialog p { color: var(--text-dim); font-size: 0.92rem; }
+dialog form { margin-top: 16px; }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; } }
+@media (min-width: 721px) {
+  .nav-links { display: flex; }
+}
+@media (max-width: 800px) {
+  .principles, .products { grid-template-columns: 1fr; }
+  .vm { grid-template-columns: 1fr; gap: 28px; }
+}
+@media (max-width: 640px) {
+  .hero { padding-top: 48px; padding-bottom: 40px; }
+  .section { padding: 44px 0; }
+  .vision { font-size: 1.3rem; }
+}
+.footer { border-top: 1px solid var(--border); padding: 40px 0 0; }
+.footer-inner { max-width: 960px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1fr; gap: 24px; }
+.footer-brand p.footer-title { font-family: var(--font-display); font-weight: 700; margin: 0 0 6px; font-size: 1.05rem; }
+.footer-brand p.footer-tag { margin: 0; color: var(--text-dim); font-size: 0.88rem; max-width: 260px; }
+.footer-col h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-dim); margin: 0 0 12px; font-weight: 700; }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-col a, .footer-col button { background: none; border: none; padding: 0; text-align: left; font-size: 0.9rem; color: var(--text-dim); text-decoration: none; cursor: pointer; }
+.footer-col a:hover, .footer-col button:hover { color: var(--text); }
+.footer-bottom { border-top: 1px solid var(--border); margin-top: 32px; font-size: 0.82rem; color: var(--text-dim); }
+.footer-bottom-in { max-width: 960px; margin: 0 auto; padding: 16px 20px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.footer-top { display: none; color: var(--text-dim); text-decoration: none; }
+.footer-top:hover { color: var(--text); }
+@media (min-width: 721px) {
+  .footer { padding-top: 56px; }
+  .footer-inner { grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; }
+  .footer-brand p.footer-tag { max-width: 300px; }
+  .footer-bottom { margin-top: 48px; }
+  .footer-bottom-in { flex-direction: row; justify-content: space-between; text-align: left; }
+  .footer-top { display: inline; }
+}
+</style>
+<script data-goatcounter="https://seluminaid.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">SeLumina<span>ID</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#vision" data-i18n="nav_vm">Vision &amp; Mission</a>
+      <a href="#products" data-i18n="nav_products">Products</a>
+    </nav>
+    <button id="langToggle" class="icon-btn" type="button" aria-label="Language">EN</button>
+    <button id="themeToggle" class="icon-btn theme-toggle" type="button" aria-pressed="false" data-i18n-aria="aria_theme" aria-label="Switch theme">
+      <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 data-i18n="hero_title">Simple software for everyday life.</h1>
+      <p class="hero-sub" data-i18n="hero_sub">SeLuminaID builds simple, practical tools that make everyday digital tasks easier.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#products" data-i18n="btn_products">Explore Our Products</a>
+        <a class="btn btn-ghost" href="#about" data-i18n="btn_about">About SeLuminaID</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-inner">
+      <h2 data-i18n="about_title">About SeLuminaID</h2>
+      <p class="lead" data-i18n="about_lead">SeLuminaID is a startup focused on developing simple software that makes everyday activities easier. We build tools that do one job clearly, work right in your browser, and don't ask you to create an account.</p>
+      <div class="principles">
+        <div class="principle">
+          <h3 data-i18n="p1_t">Simple</h3>
+          <p data-i18n="p1_d">Each tool does one job clearly, so new users know what to do without a tutorial.</p>
+        </div>
+        <div class="principle">
+          <h3 data-i18n="p2_t">Practical</h3>
+          <p data-i18n="p2_d">Built around real daily tasks, like making a QR code, shrinking a file, or merging a PDF.</p>
+        </div>
+        <div class="principle">
+          <h3 data-i18n="p3_t">Private</h3>
+          <p data-i18n="p3_d">Files are processed in your browser wherever possible, not uploaded to a server.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="vision">
+    <div class="section-inner">
+      <h2 data-i18n="vm_title">Vision &amp; Mission</h2>
+      <div class="vm">
+        <div>
+          <h3 data-i18n="vision_label">Vision</h3>
+          <p class="vision" data-i18n="vision_text">To make everyday digital tasks simple for everyone.</p>
+        </div>
+        <div>
+          <h3 data-i18n="mission_label">Mission</h3>
+          <ul class="mission">
+            <li data-i18n="m1">Build simple tools that solve real, everyday problems.</li>
+            <li data-i18n="m2">Keep every product easy to understand, even for first-time users.</li>
+            <li data-i18n="m3">Respect user privacy by processing files in the browser wherever possible.</li>
+            <li data-i18n="m4">Keep improving the quality and reliability of every product.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="section-inner">
+      <h2 data-i18n="products_title">Our Products</h2>
+      <p class="lead" data-i18n="products_lead">Each product lives on its own website. Select one to open it.</p>
+      <ul class="products">
+        <li>
+          <a class="product" style="--pc: var(--c-seqrcode)" href="https://seluminaid.github.io/seqrcodeid/" target="_blank" rel="noopener">
+            <span class="product-head"><svg class="mark" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="6.5" width="11" height="11" rx="2.2" transform="rotate(45 12 12)" fill="currentColor"/></svg><h3>SeQRCode</h3></span>
+            <p data-i18n="seqrcode_d">Create QR codes and barcodes, and scan them with your camera or from an image.</p>
+            <span class="product-foot"><span data-i18n="visit">Visit website</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span>
+          </a>
+        </li>
+        <li>
+          <a class="product" style="--pc: var(--c-secompress)" href="https://seluminaid.github.io/secompressid/" target="_blank" rel="noopener">
+            <span class="product-head"><svg class="mark" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6" fill="currentColor"/><rect x="8" y="8" width="8" height="8" rx="2" fill="var(--surface)"/></svg><h3>SeCompress</h3></span>
+            <p data-i18n="secompress_d">Reduce the size of JPG, PNG, WebP, and PDF files by compression level or target size.</p>
+            <span class="product-foot"><span data-i18n="visit">Visit website</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span>
+          </a>
+        </li>
+        <li>
+          <a class="product" style="--pc: var(--c-sepdf)" href="https://seluminaid.github.io/sepdfid/" target="_blank" rel="noopener">
+            <span class="product-head"><svg class="mark" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H13A5 5 0 0 1 18 9V17A3 3 0 0 1 15 20H9A3 3 0 0 1 6 17V7A3 3 0 0 1 9 4Z" fill="currentColor"/></svg><h3>SePDF</h3></span>
+            <p data-i18n="sepdf_d">Merge, split, compress, and rotate PDF documents.</p>
+            <span class="product-foot"><span data-i18n="visit">Visit website</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="footer-title">SeLuminaID</p>
+      <p class="footer-tag" data-i18n="footer_tag">Simple tools for everyday digital needs.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_company">Company</h4>
+      <ul>
+        <li><a href="#about" data-i18n="nav_about">About</a></li>
+        <li><a href="mailto:seluminaid@gmail.com" data-i18n="footer_contact">Contact</a></li>
+        <li><button type="button" id="privacyLink" data-i18n="footer_privacy">Privacy Policy</button></li>
+        <li><button type="button" id="termsLink" data-i18n="footer_terms">Terms of Service</button></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer_suite">SeLuminaID Products</h4>
+      <ul>
+        <li><a href="https://seluminaid.github.io/seqrcodeid/" target="_blank" rel="noopener">SeQRCode</a></li>
+        <li><a href="https://seluminaid.github.io/secompressid/" target="_blank" rel="noopener">SeCompress</a></li>
+        <li><a href="https://seluminaid.github.io/sepdfid/" target="_blank" rel="noopener">SePDF</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-in">
+      <span id="copyrightText">© 2026 SeLuminaID. All rights reserved.</span>
+      <a class="footer-top" href="#top" data-i18n="footer_top">Back to top</a>
+    </div>
+  </div>
+</footer>
+
+<dialog id="privacyDlg">
+  <h3 data-i18n="footer_privacy">Privacy Policy</h3>
+  <p data-i18n="privacy_body">This website does not ask for personal data. We count visits anonymously with GoatCounter (pages viewed, country, browser and device type). It uses no cookies and never sees the contents of your files. Each product linked here is a separate website with its own privacy information.</p>
+  <form method="dialog"><button class="btn btn-ghost" data-i18n="modal_close">Close</button></form>
+</dialog>
+<dialog id="termsDlg">
+  <h3 data-i18n="footer_terms">Terms of Service</h3>
+  <p data-i18n="terms_body">The information on this website is provided as-is. Each product has its own terms of use on its own website.</p>
+  <form method="dialog"><button class="btn btn-ghost" data-i18n="modal_close">Close</button></form>
+</dialog>
+
+<script>
+'use strict';
+
+const LANG_KEY = 'seluminaid-lang';
+const THEME_KEY = 'seluminaid-theme';
+
+const I18N = {
+  en: {
+    aria_theme: 'Switch theme',
+    nav_about: 'About', nav_vm: 'Vision & Mission', nav_products: 'Products',
+    hero_title: 'Simple software for everyday life.',
+    hero_sub: 'SeLuminaID builds simple, practical tools that make everyday digital tasks easier.',
+    btn_products: 'Explore Our Products', btn_about: 'About SeLuminaID',
+    about_title: 'About SeLuminaID',
+    about_lead: "SeLuminaID is a startup focused on developing simple software that makes everyday activities easier. We build tools that do one job clearly, work right in your browser, and don't ask you to create an account.",
+    p1_t: 'Simple', p1_d: 'Each tool does one job clearly, so new users know what to do without a tutorial.',
+    p2_t: 'Practical', p2_d: 'Built around real daily tasks, like making a QR code, shrinking a file, or merging a PDF.',
+    p3_t: 'Private', p3_d: 'Files are processed in your browser wherever possible, not uploaded to a server.',
+    vm_title: 'Vision & Mission', vision_label: 'Vision', mission_label: 'Mission',
+    vision_text: 'To make everyday digital tasks simple for everyone.',
+    m1: 'Build simple tools that solve real, everyday problems.',
+    m2: 'Keep every product easy to understand, even for first-time users.',
+    m3: 'Respect user privacy by processing files in the browser wherever possible.',
+    m4: 'Keep improving the quality and reliability of every product.',
+    products_title: 'Our Products', products_lead: 'Each product lives on its own website. Select one to open it.',
+    seqrcode_d: 'Create QR codes and barcodes, and scan them with your camera or from an image.',
+    secompress_d: 'Reduce the size of JPG, PNG, WebP, and PDF files by compression level or target size.',
+    sepdf_d: 'Merge, split, compress, and rotate PDF documents.',
+    visit: 'Visit website',
+    footer_tag: 'Simple tools for everyday digital needs.',
+    footer_company: 'Company', footer_suite: 'SeLuminaID Products', footer_top: 'Back to top',
+    footer_contact: 'Contact', footer_privacy: 'Privacy Policy', footer_terms: 'Terms of Service',
+    privacy_body: 'This website does not ask for personal data. We count visits anonymously with GoatCounter (pages viewed, country, browser and device type). It uses no cookies and never sees the contents of your files. Each product linked here is a separate website with its own privacy information.',
+    terms_body: 'The information on this website is provided as-is. Each product has its own terms of use on its own website.',
+    modal_close: 'Close'
+  },
+  id: {
+    aria_theme: 'Ganti tema',
+    nav_about: 'Tentang', nav_vm: 'Visi & Misi', nav_products: 'Produk',
+    hero_title: 'Software sederhana untuk kehidupan sehari-hari.',
+    hero_sub: 'SeLuminaID membuat alat yang sederhana dan praktis untuk mempermudah tugas digital sehari-hari.',
+    btn_products: 'Lihat Produk Kami', btn_about: 'Tentang SeLuminaID',
+    about_title: 'Tentang SeLuminaID',
+    about_lead: 'SeLuminaID adalah startup yang berfokus mengembangkan software sederhana untuk mempermudah aktivitas sehari-hari. Kami membuat alat yang menyelesaikan satu tugas dengan jelas, berjalan langsung di browser, dan tidak meminta Anda membuat akun.',
+    p1_t: 'Simpel', p1_d: 'Setiap alat menyelesaikan satu tugas dengan jelas, jadi pengguna baru langsung paham tanpa tutorial.',
+    p2_t: 'Praktis', p2_d: 'Dibuat untuk kebutuhan sehari-hari, seperti membuat QR code, memperkecil file, atau menggabungkan PDF.',
+    p3_t: 'Privat', p3_d: 'File diproses di browser Anda sedapat mungkin, bukan diunggah ke server.',
+    vm_title: 'Visi & Misi', vision_label: 'Visi', mission_label: 'Misi',
+    vision_text: 'Membuat tugas digital sehari-hari menjadi simpel bagi semua orang.',
+    m1: 'Membuat alat sederhana yang menyelesaikan masalah nyata sehari-hari.',
+    m2: 'Menjaga setiap produk mudah dipahami, bahkan oleh pengguna baru.',
+    m3: 'Menghormati privasi pengguna dengan memproses file di browser sedapat mungkin.',
+    m4: 'Terus meningkatkan kualitas dan keandalan setiap produk.',
+    products_title: 'Produk Kami', products_lead: 'Setiap produk punya situsnya sendiri. Pilih salah satu untuk membukanya.',
+    seqrcode_d: 'Buat QR code dan barcode, lalu pindai dengan kamera atau dari gambar.',
+    secompress_d: 'Perkecil ukuran file JPG, PNG, WebP, dan PDF berdasarkan tingkat kompresi atau target ukuran.',
+    sepdf_d: 'Gabungkan, pisahkan, kompres, dan putar dokumen PDF.',
+    visit: 'Kunjungi situs',
+    footer_tag: 'Alat sederhana untuk kebutuhan digital sehari-hari.',
+    footer_company: 'Perusahaan', footer_suite: 'Produk SeLuminaID', footer_top: 'Kembali ke atas',
+    footer_contact: 'Kontak', footer_privacy: 'Kebijakan Privasi', footer_terms: 'Ketentuan Layanan',
+    privacy_body: 'Situs ini tidak meminta data pribadi. Kami menghitung kunjungan secara anonim dengan GoatCounter (halaman yang dibuka, negara, browser, dan jenis perangkat). Layanan ini tidak memakai cookie dan tidak pernah melihat isi file Anda. Setiap produk yang ditautkan di sini adalah situs terpisah dengan informasi privasinya sendiri.',
+    terms_body: 'Informasi di situs ini disediakan apa adanya. Setiap produk memiliki ketentuan penggunaannya sendiri di situsnya masing-masing.',
+    modal_close: 'Tutup'
+  }
+};
+
+const state = { lang: 'en' };
+const $ = (id) => document.getElementById(id);
+
+function t(key) {
+  return (I18N[state.lang] && I18N[state.lang][key]) || I18N.en[key] || key;
+}
+
+function applyLang() {
+  document.documentElement.lang = state.lang;
+  document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.getAttribute('data-i18n')); });
+  document.querySelectorAll('[data-i18n-aria]').forEach((el) => { el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria'))); });
+  $('langToggle').textContent = state.lang === 'en' ? 'EN' : 'ID';
+  $('copyrightText').textContent = '© ' + new Date().getFullYear() + ' SeLuminaID. All rights reserved.';
+}
+
+function initLang() {
+  let saved = null;
+  try { saved = localStorage.getItem(LANG_KEY); } catch (e) {}
+  state.lang = saved === 'id' ? 'id' : 'en';
+  $('langToggle').addEventListener('click', () => {
+    state.lang = state.lang === 'en' ? 'id' : 'en';
+    try { localStorage.setItem(LANG_KEY, state.lang); } catch (e) {}
+    applyLang();
+  });
+  applyLang();
+}
+
+function applyTheme(theme) {
+  const dark = theme === 'dark';
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  $('themeToggle').setAttribute('aria-pressed', dark ? 'true' : 'false');
+  $('browserThemeColor').setAttribute('content', dark ? '#0B1226' : '#2147C7');
+}
+
+function initTheme() {
+  let saved = null;
+  try { saved = localStorage.getItem(THEME_KEY); } catch (e) {}
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(saved || (prefersDark ? 'dark' : 'light'));
+  $('themeToggle').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+  });
+}
+
+function bindDialog(btn, dlg) {
+  const d = $(dlg);
+  $(btn).addEventListener('click', () => d.showModal());
+  d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+}
+
+initTheme();
+initLang();
+bindDialog('privacyLink', 'privacyDlg');
+bindDialog('termsLink', 'termsDlg');
+</script>
+</body>
+</html>
