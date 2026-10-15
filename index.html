@@ -31,6 +31,7 @@
   --c-seqrcode: #B5772E;
   --c-secompress: #1D4ED8;
   --c-sepdf: #6D4AFF;
+  --c-seocr: #0E7C4A;
   --font-display: "Outfit", "Segoe UI", system-ui, sans-serif;
   --font-body: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
 }
@@ -49,6 +50,7 @@
   --c-seqrcode: #E8A33D;
   --c-secompress: #6EA2FF;
   --c-sepdf: #A48BFF;
+  --c-seocr: #4FD18F;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
@@ -92,7 +94,7 @@ button { font-family: inherit; font-size: inherit; cursor: pointer; }
 .vision { margin: 0; font-family: var(--font-display); font-size: 1.5rem; line-height: 1.3; letter-spacing: -0.02em; font-weight: 600; }
 .mission { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
 .mission li { padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
-.products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; list-style: none; margin: 0; padding: 0; }
+.products { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; list-style: none; margin: 0; padding: 0; }
 .products li { display: flex; }
 .product { display: flex; flex-direction: column; gap: 8px; width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; text-decoration: none; color: var(--text); box-shadow: var(--shadow); }
 a.product:hover { border-color: var(--pc); }
@@ -241,6 +243,13 @@ dialog form { margin-top: 16px; }
             <span class="product-foot"><span data-i18n="visit">Visit website</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span>
           </a>
         </li>
+        <li>
+          <a class="product" style="--pc: var(--c-seocr)" href="https://seluminaid.github.io/seocrid/" target="_blank" rel="noopener">
+            <span class="product-head"><svg class="mark" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="currentColor"/></svg><h3>SeOCR</h3></span>
+            <p data-i18n="seocr_d">Extract text from photos, screenshots, and scanned PDFs in English and Indonesian.</p>
+            <span class="product-foot"><span data-i18n="visit">Visit website</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span>
+          </a>
+        </li>
       </ul>
     </div>
   </section>
@@ -268,6 +277,7 @@ dialog form { margin-top: 16px; }
         <li><a href="https://seluminaid.github.io/seqrcodeid/" target="_blank" rel="noopener">SeQRCode</a></li>
         <li><a href="https://seluminaid.github.io/secompressid/" target="_blank" rel="noopener">SeCompress</a></li>
         <li><a href="https://seluminaid.github.io/sepdfid/" target="_blank" rel="noopener">SePDF</a></li>
+        <li><a href="https://seluminaid.github.io/seocrid/" target="_blank" rel="noopener">SeOCR</a></li>
       </ul>
     </div>
   </div>
@@ -318,6 +328,7 @@ const I18N = {
     seqrcode_d: 'Create QR codes and barcodes, and scan them with your camera or from an image.',
     secompress_d: 'Reduce the size of JPG, PNG, WebP, and PDF files by compression level or target size.',
     sepdf_d: 'Merge, split, compress, and rotate PDF documents.',
+    seocr_d: 'Extract text from photos, screenshots, and scanned PDFs in English and Indonesian.',
     visit: 'Visit website',
     footer_tag: 'Simple tools for everyday digital needs.',
     footer_company: 'Company', footer_suite: 'SeLuminaID Products', footer_top: 'Back to top',
@@ -347,6 +358,7 @@ const I18N = {
     seqrcode_d: 'Buat QR code dan barcode, lalu pindai dengan kamera atau dari gambar.',
     secompress_d: 'Perkecil ukuran file JPG, PNG, WebP, dan PDF berdasarkan tingkat kompresi atau target ukuran.',
     sepdf_d: 'Gabungkan, pisahkan, kompres, dan putar dokumen PDF.',
+    seocr_d: 'Ambil teks dari foto, tangkapan layar, dan PDF hasil scan dalam bahasa Inggris dan Indonesia.',
     visit: 'Kunjungi situs',
     footer_tag: 'Alat sederhana untuk kebutuhan digital sehari-hari.',
     footer_company: 'Perusahaan', footer_suite: 'Produk SeLuminaID', footer_top: 'Kembali ke atas',
