@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#2147C7" id="browserThemeColor">
 <title>SeLuminaID — Simple Software for Everyday Life</title>
+
+<link rel="icon" type="image/png" href="logo.jpg">
+<link rel="apple-touch-icon" href="logo.jpg">
+
+<meta property="og:image" content="https://seluminaid.github.io/SeLuminaID/logo.jpg">
+<meta name="twitter:image" content="https://seluminaid.github.io/SeLuminaID/logo.jpg">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebSite",
+ "name": "SeLuminaID",
+ "url": "https://seluminaid.github.io/SeLuminaID/",
+ "image": "https://seluminaid.github.io/SeLuminaID/logo.jpg"
+}
+</script>
+
 <meta name="description" content="SeLuminaID builds simple, practical software that makes everyday digital tasks easier.">
 <meta property="og:title" content="SeLuminaID — Simple Software for Everyday Life">
 <meta property="og:description" content="SeLuminaID builds simple, practical software that makes everyday digital tasks easier.">
@@ -32,6 +49,7 @@
   --c-secompress: #1D4ED8;
   --c-sepdf: #6D4AFF;
   --c-seocr: #0E7C4A;
+  --c-secolor: #C2185B;
   --font-display: "Outfit", "Segoe UI", system-ui, sans-serif;
   --font-body: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
 }
@@ -51,6 +69,7 @@
   --c-secompress: #6EA2FF;
   --c-sepdf: #A48BFF;
   --c-seocr: #4FD18F;
+  --c-secolor: #FF7AB0;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
@@ -250,6 +269,13 @@ dialog form { margin-top: 16px; }
             <span class="product-foot"><span data-i18n="visit">Visit website</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span>
           </a>
         </li>
+        <li>
+          <a class="product" style="--pc: var(--c-secolor)" href="https://seluminaid.github.io/secolorid/" target="_blank" rel="noopener">
+            <span class="product-head"><svg class="mark" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C12 3 5.5 10 5.5 14.5a6.5 6.5 0 0 0 13 0C18.5 10 12 3 12 3Z" fill="currentColor"/></svg><h3>SeColor</h3></span>
+            <p data-i18n="secolor_d">Pull colors from images, build palettes, and check text contrast.</p>
+            <span class="product-foot"><span data-i18n="visit">Visit website</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span>
+          </a>
+        </li>
       </ul>
     </div>
   </section>
@@ -278,6 +304,7 @@ dialog form { margin-top: 16px; }
         <li><a href="https://seluminaid.github.io/secompressid/" target="_blank" rel="noopener">SeCompress</a></li>
         <li><a href="https://seluminaid.github.io/sepdfid/" target="_blank" rel="noopener">SePDF</a></li>
         <li><a href="https://seluminaid.github.io/seocrid/" target="_blank" rel="noopener">SeOCR</a></li>
+        <li><a href="https://seluminaid.github.io/secolorid/" target="_blank" rel="noopener">SeColor</a></li>
       </ul>
     </div>
   </div>
@@ -329,6 +356,7 @@ const I18N = {
     secompress_d: 'Reduce the size of JPG, PNG, WebP, and PDF files by compression level or target size.',
     sepdf_d: 'Merge, split, compress, and rotate PDF documents.',
     seocr_d: 'Extract text from photos, screenshots, and scanned PDFs in English and Indonesian.',
+    secolor_d: 'Pull colors from images, build palettes, and check text contrast.',
     visit: 'Visit website',
     footer_tag: 'Simple tools for everyday digital needs.',
     footer_company: 'Company', footer_suite: 'SeLuminaID Products', footer_top: 'Back to top',
@@ -359,6 +387,7 @@ const I18N = {
     secompress_d: 'Perkecil ukuran file JPG, PNG, WebP, dan PDF berdasarkan tingkat kompresi atau target ukuran.',
     sepdf_d: 'Gabungkan, pisahkan, kompres, dan putar dokumen PDF.',
     seocr_d: 'Ambil teks dari foto, tangkapan layar, dan PDF hasil scan dalam bahasa Inggris dan Indonesia.',
+    secolor_d: 'Ambil warna dari gambar, buat palet, dan cek kontras teks.',
     visit: 'Kunjungi situs',
     footer_tag: 'Alat sederhana untuk kebutuhan digital sehari-hari.',
     footer_company: 'Perusahaan', footer_suite: 'Produk SeLuminaID', footer_top: 'Kembali ke atas',
